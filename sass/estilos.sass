@@ -1,0 +1,310 @@
+// =======================
+// VARIABLES
+// =======================
+$color-fondo: #08295e;
+$color-acento: #00aaff;
+$color-acento-hover: #0088cc;
+$color-footer: #00163d;
+$color-error: #ff5555;
+$fuente-principal: 'Poppins', sans-serif;
+
+// =======================
+// RESET
+// =======================
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// =======================
+// BODY
+// =======================
+body {
+  font-family: $fuente-principal;
+  background-color: $color-fondo;
+  color: white;
+  line-height: 1.5;
+}
+
+// =======================
+// HEADER (Base, Sticky)
+// =======================
+header {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-bottom: 2px solid $color-acento;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  .logo {
+    width: 130px;
+    height: auto;
+  }
+
+  nav {
+    ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      flex-wrap: nowrap;
+
+      li {
+        a {
+          text-decoration: none;
+          text-transform: uppercase;
+          font-weight: bold;
+          color: white;
+          transition: color 0.3s;
+
+          &:hover {
+            color: $color-acento;
+          }
+        }
+      }
+    }
+  }
+}
+
+// =======================
+// MAIN (Base)
+// =======================
+main {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+// =======================
+// FOOTER
+// =======================
+footer {
+  background-color: $color-footer;
+  padding: 20px;
+  text-align: center;
+  font-size: 0.9em;
+  border-top: 2px solid $color-acento;
+
+  h2 {
+    color: $color-error;
+    margin-bottom: 10px;
+  }
+}
+
+// =======================
+// HOME (Carousel + Intro)
+// =======================
+.carousel {
+  max-width: 100%;
+  height: auto;
+  margin: 30px auto;
+  overflow: hidden;
+  border-radius: 10px;
+
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+.intro {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: justify;
+  padding: 20px;
+}
+
+.social-links {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+
+  a {
+    img {
+      width: 40px;
+      transition: transform 0.3s;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+// =======================
+// ABOUT US
+// =======================
+.about-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-section {
+  margin-bottom: 60px;
+}
+
+.member {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+
+  img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+
+  .info {
+    max-width: 600px;
+    text-align: left;
+
+    h3 {
+      color: $color-acento;
+      margin-bottom: 5px;
+    }
+
+    p {
+      margin-top: 12px;
+    }
+  }
+
+  .links {
+    a {
+      color: $color-acento;
+      font-weight: bold;
+      margin-right: 15px;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// =======================
+// DEV DIARY
+// =======================
+.dev-diary {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.entrada-dev {
+  border-bottom: 2px solid $color-acento;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+}
+
+.roadmap-img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.imagenes-dev {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+
+.imagen-dev {
+  width: 48%;
+  border-radius: 10px;
+}
+
+// =======================
+// CONTACT
+// =======================
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 10px;
+
+  label {
+    text-align: left;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+  }
+
+  input[type="submit"],
+  input[type="reset"] {
+    background-color: $color-acento;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.3s;
+
+    &:hover {
+      background-color: $color-acento-hover;
+    }
+  }
+}
+
+// =======================
+// RESPONSIVE
+// =======================
+@media (max-width: 768px) {
+  header {
+    position: fixed;
+    width: 100%;
+    padding: 10px 15px;
+
+    .logo {
+      width: 100px;
+    }
+
+    nav {
+      ul {
+        gap: 10px;
+      }
+    }
+  }
+
+  main {
+    padding-top: 90px;
+  }
+
+  .member {
+    flex-direction: column;
+    text-align: center;
+
+    img {
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+  .imagenes-dev {
+    flex-direction: column;
+  }
+
+  .imagen-dev {
+    width: 100%;
+  }
+}

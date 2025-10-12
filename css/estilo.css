@@ -1,0 +1,286 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #08295e;
+    color: white;
+    line-height: 1.5;
+}
+
+/* ======== HEADER (Base, Sticky) ======== */
+header {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-bottom: 2px solid #00aaff;
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 40px;
+    position: sticky; 
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    width: 130px;
+    height: auto;
+    
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    
+    flex-wrap: nowrap; 
+}
+
+nav ul li a {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    transition: color 0.3s;
+    
+}
+
+nav ul li a:hover {
+    color: #00aaff;
+}
+
+/* ======== MAIN (Base) ======== */
+main {
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* ======== CARRUSEL MODIFICADO AQUÍ ======== */
+.carousel {
+    max-width: 1000px; /* Puedes ajustar el ancho máximo */
+    margin: 30px auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* Establece una altura fija para las imágenes en escritorio */
+/* ¡AJUSTA EL VALOR DE 'height' (500px) si lo quieres más chico o más grande! */
+.carousel-inner img {
+    width: 100%;
+    height: 500px; /* ALTURA DESEADA en escritorio */
+    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionar */
+    border-radius: 10px; /* Mantener los bordes redondeados */
+}
+
+/* Para que las flechas de Bootstrap sean visibles contra fondos oscuros */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(1);
+}
+/* ======== FIN DE MODIFICACIÓN DEL CARRUSEL ======== */
+
+
+/* ======== FOOTER & OTROS (Sin cambios) ======== */
+footer {
+    background-color: #00163d;
+    padding: 20px;
+    text-align: center;
+    font-size: 0.9em;
+    border-top: 2px solid #00aaff;
+}
+
+.intro {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: justify;
+    padding: 20px;
+}
+
+.social-links {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-links a img {
+    width: 40px;
+    transition: transform 0.3s;
+}
+
+.social-links a img:hover {
+    transform: scale(1.2);
+}
+
+.about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.team-section {
+    margin-bottom: 60px;
+}
+
+.member {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.member img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.member .info {
+    max-width: 600px;
+    text-align: left;
+}
+
+.member .info h3 {
+    color: #00aaff;
+    margin-bottom: 5px;
+}
+
+/* 🚀 CORRECCIÓN APLICADA AQUÍ: Separación mínima para los párrafos */
+.member .info p {
+    margin-top: 12px; 
+}
+
+.member .links a {
+    color: #00aaff;
+    font-weight: bold;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.member .links a:hover {
+    text-decoration: underline;
+}
+
+.dev-diary {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.entrada-dev {
+    border-bottom: 2px solid #00aaff;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+}
+
+.roadmap-img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.imagenes-dev {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+}
+
+.imagen-dev {
+    width: 48%;
+    border-radius: 10px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: rgba(255,255,255,0.1);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+form label {
+    text-align: left;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+}
+
+form input[type="submit"],
+form input[type="reset"] {
+    background-color: #00aaff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.3s;
+}
+
+form input[type="submit"]:hover,
+form input[type="reset"]:hover {
+    background-color: #0088cc;
+}
+
+footer h2 {
+    color: #ff5555;
+    margin-bottom: 10px;
+}
+
+/* ======== RESPONSIVE ======== */
+@media (max-width: 768px) {
+    
+    header {
+        position: fixed; 
+        width: 100%;
+        padding: 10px 15px; 
+    }
+
+    .logo {
+        width: 100px; 
+    }
+
+    nav ul {
+        gap: 10px; 
+    }
+    
+    main {
+        padding-top: 90px; 
+    }
+
+    .member {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .member img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .imagenes-dev {
+        flex-direction: column;
+    }
+
+    .imagen-dev {
+        width: 100%;
+    }
+    
+    /* Regla específica para el carrusel en móvil */
+    /* ¡AJUSTA EL VALOR DE 'height' (250px) si lo quieres más chico o más grande en el celular! */
+    .carousel-inner img {
+        height: 250px; /* ALTURA DESEADA en móvil */
+    }
+}

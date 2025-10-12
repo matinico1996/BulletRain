@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bullet Rain Interactive</title>
+
+
+  
+    <meta name="description" content="Bullet Rain Interactive — estudio cordobés de videojuegos fundado en 2025. Desarrollamos videojuegos desde Córdoba con pasión, arte e innovación.">
+    <meta name="keywords" content="videojuegos, bulletrain, BULLETRAIN, bullet rain, videojuegos cordoba, ies videojuegos, desarrollo de videojuegos, estudio indie, Córdoba Argentina, Bullet Rain Interactive, voidcat,VOIDCAT,VoidCat">
+    <meta name="author" content="Bullet Rain Interactive">
+
+
+
+    <!--css-->
+     <link rel="stylesheet" href="../css/estilo.css">
+</head>
+<body>
+    <header>
+        <a href="">
+            <img class="logo" src="../img/logo blanco.png" alt="logo BulletRain">
+        </a>
+
+
+        <nav>
+            <ul> 
+                <li><a href="home.html">home</a></li>
+                <li><a href="About Us.html">About Us</a></li>
+                <li><a href="Dev Diary.html">Dev Diary</a></li>
+                <li><a href="Contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Bullet Rain Interactive</h1>
+
+        <h2>Opinión</h2>
+
+        <form id="form" action="https://api.web3forms.com/submit" method="POST">
+
+            <!-- Clave de acceso (obligatoria para conectar con tu cuenta Web3Forms) -->
+            <input type="hidden" name="access_key" value="1094fed9-c896-4c66-8a6a-20d38ec1c3cd">
+
+            <!-- Asunto del correo que recibirás -->
+            <input type="hidden" name="subject" value="Nuevo mensaje desde el formulario de Bullet Rain Interactive">
+
+            <!-- Campo de nombre -->
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" name="nombre" required>
+
+            <!-- Campo de correo -->
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <!-- Campo de mensaje -->
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" cols="30" rows="10" placeholder="Deja tu opinión" required></textarea>
+
+            <!-- Botones de envío y reseteo -->
+            <input type="submit" value="Enviar">
+            <input type="reset" value="Borrar">
+
+        </form>
+
+        
+        <div id="resultado"></div>
+        
+        <p>BulletRain Interactive </p>
+
+
+    </main>
+
+    <footer>
+        <h2>cualquier insulto,mala utilización de la hoja de opinión  y/o amenaza sera tomado con fines legales</h2>
+        <h3> Bullet Rain Interactive - Todos los Derechos reservados © 2025 </h3>
+    </footer>
+    <script>
+        const form = document.getElementById('form');
+        const resultado = document.getElementById('resultado');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); 
+
+            const data = new FormData(form);
+            const response = await fetch(form.action, {
+                method: form.method,
+                body: data
+            });
+
+            if (response.ok) {
+                resultado.innerHTML = "<p style='color:green;'>Mensaje enviado correctamente.</p>";
+                form.reset(); // Limpia los campos
+            } else {
+                resultado.innerHTML = "<p style='color:red;'>Ocurrió un error. Intenta de nuevo.</p>";
+            }
+        });
+    </script>
+
+
+
+</body>
+</html>
