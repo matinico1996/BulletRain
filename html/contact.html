@@ -40,6 +40,8 @@
 
             <input type="hidden" name="subject" value="Nuevo mensaje desde el formulario de Bullet Rain Interactive">
 
+            <input type="hidden" name="user_ip" id="user_ip_field" value=""> 
+
             <label for="nombre">Nombre</label>
             <input type="text" id="nombre" name="nombre" required>
 
@@ -71,44 +73,56 @@
         const form = document.getElementById('form');
         const resultado = document.getElementById('resultado');
         const emailInput = document.getElementById('email');
+        const ipField = document.getElementById('user_ip_field'); // 👈 El campo IP
 
-        // Lista de dominios de correo válidos que deseas permitir
+        // Lista de dominios de correo válidos
         const dominiosValidos = [
             'gmail.com',
             'outlook.com',
             'hotmail.com',
             'protonmail.com',
             'yahoo.com',
-            // Puedes añadir más dominios aquí:
-            // 'aold.com', 
         ];
+
+        // Función ASÍNCRONA para obtener la IP del usuario
+        async function getIpAddress() {
+            try {
+                // Usamos un servicio público para obtener la IP
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                ipField.value = data.ip; // Escribe la IP en el campo oculto
+            } catch (error) {
+                console.error("No se pudo obtener la IP:", error);
+                ipField.value = "IP no disponible"; // Valor por defecto si falla
+            }
+        }
+        
+        // Ejecutar la función para obtener la IP tan pronto como la página cargue
+        getIpAddress(); 
 
         form.addEventListener('submit', async (e) => {
             
-            // 1. Validar los campos 'required' de HTML5 (Nombre, Email, Mensaje)
+            // 1. Validación HTML5 (required)
             if (!form.checkValidity()) {
                 e.preventDefault(); 
                 return; 
             }
 
-            // 2. Validar que el dominio del correo sea de un proveedor conocido (la lógica solicitada)
+            e.preventDefault(); // Detenemos el envío para validar con JS y usar fetch
+
+            // 2. Validación de Dominio (JavaScript)
             const emailValue = emailInput.value.toLowerCase();
             const partesEmail = emailValue.split('@');
 
-            // Prevenimos el envío por defecto si no pasa la validación
-            e.preventDefault(); 
-
             if (partesEmail.length !== 2 || !dominiosValidos.includes(partesEmail[1])) {
-                // Mostrar un error personalizado si el dominio no es válido
                 resultado.innerHTML = "<p style='color:orange;'>❌ Por favor, usa un correo válido de Gmail, Outlook, Hotmail, ProtonMail o Yahoo.</p>";
-                // Aquí podrías enfocar el campo para que el usuario lo corrija
                 emailInput.focus(); 
-                return; // Detenemos el envío
+                return; 
             }
 
-            // Si pasa la validación de HTML5 y la validación de dominio:
+            // Si es válido, la IP ya debería estar en ipField.value
             // 3. Proceder al envío mediante fetch
-            resultado.innerHTML = "<p style='color:blue;'>Enviando mensaje...</p>"; // Mensaje de carga
+            resultado.innerHTML = "<p style='color:blue;'>Enviando mensaje...</p>"; 
             const data = new FormData(form);
             
             try {
@@ -124,13 +138,12 @@
 
                 if (response.ok && result.success) { 
                     resultado.innerHTML = "<p style='color:green;'>✅ ¡Mensaje enviado correctamente! Gracias por tu opinión.</p>";
-                    form.reset(); // Limpia los campos
+                    form.reset(); 
                 } else {
                     const message = result.message || "Ocurrió un error al enviar. Intenta de nuevo.";
                     resultado.innerHTML = `<p style='color:red;'>🛑 Error al enviar: ${message}</p>`;
                 }
             } catch (error) {
-                // Manejo de errores de red
                 resultado.innerHTML = "<p style='color:red;'>⚠️ Ocurrió un error de conexión. Verifica tu internet e intenta de nuevo.</p>";
             }
         });
