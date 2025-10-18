@@ -40,13 +40,13 @@
             <input type="hidden" name="subject" value="Nuevo mensaje desde el formulario de Bullet Rain Interactive">
 
             <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" **required**>
+            <input type="text" id="nombre" name="nombre" required>
 
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" **required**>
+            <input type="email" id="email" name="email" required>
 
             <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" cols="30" rows="10" placeholder="Deja tu opinión" **required**></textarea>
+            <textarea id="mensaje" name="mensaje" cols="30" rows="10" placeholder="Deja tu opinión" required></textarea>
 
             <input type="submit" value="Enviar">
             <input type="reset" value="Borrar">
@@ -69,20 +69,45 @@
     <script>
         const form = document.getElementById('form');
         const resultado = document.getElementById('resultado');
+        const emailInput = document.getElementById('email');
+
+        // Lista de dominios de correo válidos que deseas permitir
+        const dominiosValidos = [
+            'gmail.com',
+            'outlook.com',
+            'hotmail.com',
+            'protonmail.com',
+            'yahoo.com',
+            // Puedes añadir más dominios aquí:
+            // 'aold.com', 
+        ];
 
         form.addEventListener('submit', async (e) => {
             
-            // 🛑 PASO CLAVE: Forzar la validación de HTML5 (atributo 'required')
+            // 1. Validar los campos 'required' de HTML5 (Nombre, Email, Mensaje)
             if (!form.checkValidity()) {
-                // Si la validación falla (campos vacíos), prevenimos el envío 
-                // para que el navegador muestre el mensaje de error por defecto.
                 e.preventDefault(); 
-                return; // Salimos de la función
+                return; 
             }
 
-            // Si es válido, ahora sí detenemos el envío normal para usar 'fetch'
+            // 2. Validar que el dominio del correo sea de un proveedor conocido (la lógica solicitada)
+            const emailValue = emailInput.value.toLowerCase();
+            const partesEmail = emailValue.split('@');
+
+            // Prevenimos el envío por defecto si no pasa la validación
             e.preventDefault(); 
 
+            if (partesEmail.length !== 2 || !dominiosValidos.includes(partesEmail[1])) {
+                // Mostrar un error personalizado si el dominio no es válido
+                resultado.innerHTML = "<p style='color:orange;'>❌ Por favor, usa un correo válido de Gmail, Outlook, Hotmail, ProtonMail o Yahoo.</p>";
+                // Aquí podrías enfocar el campo para que el usuario lo corrija
+                emailInput.focus(); 
+                return; // Detenemos el envío
+            }
+
+            // Si pasa la validación de HTML5 y la validación de dominio:
+            // 3. Proceder al envío mediante fetch
+            resultado.innerHTML = "<p style='color:blue;'>Enviando mensaje...</p>"; // Mensaje de carga
             const data = new FormData(form);
             
             try {
@@ -90,26 +115,24 @@
                     method: form.method,
                     body: data,
                     headers: {
-                        'Accept': 'application/json' // Para recibir una respuesta JSON de Web3Forms
+                        'Accept': 'application/json'
                     }
                 });
 
                 const result = await response.json(); 
 
-                if (response.ok && result.success) { // Verificamos el estado y la propiedad 'success' de Web3Forms
-                    resultado.innerHTML = "<p style='color:green;'>¡Mensaje enviado correctamente! Gracias por tu opinión.</p>";
+                if (response.ok && result.success) { 
+                    resultado.innerHTML = "<p style='color:green;'>✅ ¡Mensaje enviado correctamente! Gracias por tu opinión.</p>";
                     form.reset(); // Limpia los campos
                 } else {
-                    // Manejo de errores de Web3Forms (ej. llave inválida, etc.)
                     const message = result.message || "Ocurrió un error al enviar. Intenta de nuevo.";
-                    resultado.innerHTML = `<p style='color:red;'>Error al enviar: ${message}</p>`;
+                    resultado.innerHTML = `<p style='color:red;'>🛑 Error al enviar: ${message}</p>`;
                 }
             } catch (error) {
-                // Manejo de errores de red o del servidor
-                resultado.innerHTML = "<p style='color:red;'>Ocurrió un error de conexión. Verifica tu internet e intenta de nuevo.</p>";
+                // Manejo de errores de red
+                resultado.innerHTML = "<p style='color:red;'>⚠️ Ocurrió un error de conexión. Verifica tu internet e intenta de nuevo.</p>";
             }
         });
     </script>
-
 </body>
 </html>
