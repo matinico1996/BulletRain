@@ -115,7 +115,7 @@
             const partesEmail = emailValue.split('@');
 
             if (partesEmail.length !== 2 || !dominiosValidos.includes(partesEmail[1])) {
-                resultado.innerHTML = "<p style='color:orange;'>❌ Por favor, usa un correo válido de Gmail, Outlook, Hotmail, ProtonMail o Yahoo.</p>";
+                resultado.innerHTML = "<p style='color:orange;'> Correo no valido</p>";
                 emailInput.focus(); 
                 return; 
             }
@@ -137,14 +137,14 @@
                 const result = await response.json(); 
 
                 if (response.ok && result.success) { 
-                    resultado.innerHTML = "<p style='color:green;'>✅ ¡Mensaje enviado correctamente! Gracias por tu opinión.</p>";
+                    resultado.innerHTML = "<p style='color:green;'> ¡Mensaje enviado correctamente! Gracias por tu opinión.</p>";
                     form.reset(); 
                 } else {
                     const message = result.message || "Ocurrió un error al enviar. Intenta de nuevo.";
-                    resultado.innerHTML = `<p style='color:red;'>🛑 Error al enviar: ${message}</p>`;
+                    resultado.innerHTML = `<p style='color:red;'> Error al enviar: ${message}</p>`;
                 }
             } catch (error) {
-                resultado.innerHTML = "<p style='color:red;'>⚠️ Ocurrió un error de conexión. Verifica tu internet e intenta de nuevo.</p>";
+                resultado.innerHTML = "<p style='color:red;'> Ocurrió un error de conexión. Verifica tu internet e intenta de nuevo.</p>";
             }
         });
     </script>
